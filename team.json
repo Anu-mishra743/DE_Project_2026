@@ -1,0 +1,27 @@
+{
+  "team_number": "T0119",
+  "group_lead": {
+    "name": "Vanshika Rajoria",
+    "enrollment_no": "2501010718",
+    "github": "rajoriavanshika128-bit"
+  },
+  "members": [
+    {
+      "name": "Anushka Mishra",
+      "enrollment_no": "2501010608",
+      "github": "Anu-mishra743"
+    },
+    {
+      "name": "Arush Singla",
+      "enrollment_no": "2501010089",
+      "github": "ArushSingla"
+    },
+    {
+      "name": "Priyanshu",
+      "enrollment_no": "2501010357",
+      "github": "Priynnshu"
+    }
+  ],
+  "postgres_version": "",
+  "laptop_used_for_benchmarks": ""
+}

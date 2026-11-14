@@ -22,12 +22,12 @@
 
 | Role | Name | Enrollment No. | GitHub Username |
 |------|------|----------------|-----------------|
-| Group Lead | | | |
-| Member 2 | | | |
-| Member 3 | | | |
-| Member 4 | | | |
+| Group Lead | Vanshika Rajoria	| 2501010718| rajoriavanshika128-bit|
+| Member 2 | Anushka Mishra| 2501010608| Anu-mishra743|
+| Member 3 | Arush Singla| 2501010089| ArushSingla|
+| Member 4 | Priyanshu| 2501010357| Priynnshu|
 
-**Team No.:** ____ · **Section:** ____ · **Repository URL:** ____
+**Team No.:** T0119  · **Section:**B · **Repository URL:** https://github.com/Anu-mishra743/DE_Project_2026
 
 ---
 
