@@ -1,0 +1,284 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1150" width="1600" height="1150" style="background:#0f172a; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="headerPropGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#6d28d9"/>
+    </linearGradient>
+    <linearGradient id="headerTxGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000000" flood-opacity="0.4"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#94a3b8" />
+    </marker>
+  </defs>
+
+  <!-- Title & Subtitle -->
+  <text x="800" y="45" text-anchor="middle" fill="#f8fafc" font-size="26" font-weight="bold">Housing.com Property Search — Entity Relationship Diagram</text>
+  <text x="800" y="72" text-anchor="middle" fill="#94a3b8" font-size="14">PostgreSQL Schema: housing · 12 Relational Tables with Keys, Constraints &amp; Cardinality</text>
+
+  <!-- ================= ROW 1: MASTER LOOKUPS & SPATIAL ================= -->
+  
+  <!-- CITIES (x: 50, y: 110, w: 240, h: 140) -->
+  <g filter="url(#shadow)">
+    <rect x="50" y="110" width="240" height="130" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+    <rect x="50" y="110" width="240" height="34" rx="8" fill="url(#headerGrad)"/>
+    <rect x="50" y="136" width="240" height="8" fill="url(#headerGrad)"/>
+    <text x="170" y="133" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="bold">cities</text>
+    <text x="65" y="165" fill="#fbbf24" font-size="12" font-family="monospace">PK  city_id : INT</text>
+    <text x="65" y="190" fill="#e2e8f0" font-size="12" font-family="monospace">UQ  city_name : VARCHAR(100)</text>
+    <text x="65" y="215" fill="#e2e8f0" font-size="12" font-family="monospace">    state : VARCHAR(100)</text>
+  </g>
+
+  <!-- LOCALITIES (x: 350, y: 110, w: 260, h: 215) -->
+  <g filter="url(#shadow)">
+    <rect x="350" y="110" width="260" height="215" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+    <rect x="350" y="110" width="260" height="34" rx="8" fill="url(#headerGrad)"/>
+    <rect x="350" y="136" width="260" height="8" fill="url(#headerGrad)"/>
+    <text x="480" y="133" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="bold">localities</text>
+    <text x="365" y="165" fill="#fbbf24" font-size="12" font-family="monospace">PK  locality_id : INT</text>
+    <text x="365" y="190" fill="#38bdf8" font-size="12" font-family="monospace">FK  city_id : INT</text>
+    <text x="365" y="215" fill="#e2e8f0" font-size="12" font-family="monospace">    locality_name : VARCHAR(100)</text>
+    <text x="365" y="240" fill="#e2e8f0" font-size="12" font-family="monospace">    pincode : CHAR(6)</text>
+    <text x="365" y="265" fill="#e2e8f0" font-size="12" font-family="monospace">    center_lat : NUMERIC(9,6)</text>
+    <text x="365" y="290" fill="#e2e8f0" font-size="12" font-family="monospace">    center_lng : NUMERIC(9,6)</text>
+    <text x="365" y="312" fill="#94a3b8" font-size="10" font-style="italic">UQ (city_id, locality_name)</text>
+  </g>
+
+  <!-- BUILDERS (x: 670, y: 110, w: 240, h: 140) -->
+  <g filter="url(#shadow)">
+    <rect x="670" y="110" width="240" height="135" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+    <rect x="670" y="110" width="240" height="34" rx="8" fill="url(#headerGrad)"/>
+    <rect x="670" y="136" width="240" height="8" fill="url(#headerGrad)"/>
+    <text x="790" y="133" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="bold">builders</text>
+    <text x="685" y="165" fill="#fbbf24" font-size="12" font-family="monospace">PK  builder_id : INT</text>
+    <text x="685" y="190" fill="#e2e8f0" font-size="12" font-family="monospace">UQ  builder_name : VARCHAR(150)</text>
+    <text x="685" y="215" fill="#e2e8f0" font-size="12" font-family="monospace">    founded_year : INT</text>
+    <text x="685" y="235" fill="#94a3b8" font-size="10" font-style="italic">CHK (founded_year 1800-2100)</text>
+  </g>
+
+  <!-- PROJECTS (x: 970, y: 110, w: 270, h: 240) -->
+  <g filter="url(#shadow)">
+    <rect x="970" y="110" width="270" height="240" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+    <rect x="970" y="110" width="270" height="34" rx="8" fill="url(#headerGrad)"/>
+    <rect x="970" y="136" width="270" height="8" fill="url(#headerGrad)"/>
+    <text x="1105" y="133" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="bold">projects</text>
+    <text x="985" y="165" fill="#fbbf24" font-size="12" font-family="monospace">PK  project_id : INT</text>
+    <text x="985" y="190" fill="#38bdf8" font-size="12" font-family="monospace">FK  builder_id : INT</text>
+    <text x="985" y="215" fill="#38bdf8" font-size="12" font-family="monospace">FK  locality_id : INT</text>
+    <text x="985" y="240" fill="#e2e8f0" font-size="12" font-family="monospace">    project_name : VARCHAR(150)</text>
+    <text x="985" y="265" fill="#94a3b8" font-size="12" font-family="monospace">    rera_id : VARCHAR(50) [N]</text>
+    <text x="985" y="290" fill="#e2e8f0" font-size="12" font-family="monospace">    possession_status : VARCHAR(20)</text>
+    <text x="985" y="315" fill="#e2e8f0" font-size="12" font-family="monospace">    possession_date : DATE</text>
+    <text x="985" y="340" fill="#e2e8f0" font-size="12" font-family="monospace">    total_units : INT</text>
+  </g>
+
+  <!-- AMENITIES (x: 1300, y: 110, w: 250, h: 120) -->
+  <g filter="url(#shadow)">
+    <rect x="1300" y="110" width="250" height="120" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+    <rect x="1300" y="110" width="250" height="34" rx="8" fill="url(#headerGrad)"/>
+    <rect x="1300" y="136" width="250" height="8" fill="url(#headerGrad)"/>
+    <text x="1425" y="133" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="bold">amenities</text>
+    <text x="1315" y="165" fill="#fbbf24" font-size="12" font-family="monospace">PK  amenity_id : INT</text>
+    <text x="1315" y="195" fill="#e2e8f0" font-size="12" font-family="monospace">UQ  amenity_name : VARCHAR(100)</text>
+  </g>
+
+  <!-- PROJECT_AMENITIES (x: 1300, y: 280, w: 250, h: 120) -->
+  <g filter="url(#shadow)">
+    <rect x="1300" y="280" width="250" height="120" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+    <rect x="1300" y="280" width="250" height="34" rx="8" fill="url(#headerGrad)"/>
+    <rect x="1300" y="306" width="250" height="8" fill="url(#headerGrad)"/>
+    <text x="1425" y="303" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="bold">project_amenities</text>
+    <text x="1315" y="335" fill="#fbbf24" font-size="12" font-family="monospace">PK,FK project_id : INT</text>
+    <text x="1315" y="365" fill="#fbbf24" font-size="12" font-family="monospace">PK,FK amenity_id : INT</text>
+    <text x="1315" y="388" fill="#94a3b8" font-size="10" font-style="italic">Composite PK (M:N junction)</text>
+  </g>
+
+  <!-- ================= ROW 2: CORE PROPERTIES & USERS ================= -->
+
+  <!-- USERS (x: 50, y: 440, w: 260, h: 220) -->
+  <g filter="url(#shadow)">
+    <rect x="50" y="440" width="260" height="220" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+    <rect x="50" y="440" width="260" height="34" rx="8" fill="url(#headerPropGrad)"/>
+    <rect x="50" y="466" width="260" height="8" fill="url(#headerPropGrad)"/>
+    <text x="180" y="463" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="bold">users</text>
+    <text x="65" y="495" fill="#fbbf24" font-size="12" font-family="monospace">PK  user_id : INT</text>
+    <text x="65" y="520" fill="#e2e8f0" font-size="12" font-family="monospace">    full_name : VARCHAR(150)</text>
+    <text x="65" y="545" fill="#e2e8f0" font-size="12" font-family="monospace">UQ  phone : VARCHAR(15)</text>
+    <text x="65" y="570" fill="#94a3b8" font-size="12" font-family="monospace">UQ  email : VARCHAR(150) [N]</text>
+    <text x="65" y="595" fill="#e2e8f0" font-size="12" font-family="monospace">CHK user_type : VARCHAR(10)</text>
+    <text x="65" y="620" fill="#94a3b8" font-size="12" font-family="monospace">    agent_rera_id : VARCHAR(50)[N]</text>
+    <text x="65" y="645" fill="#e2e8f0" font-size="12" font-family="monospace">    created_at : TIMESTAMPTZ</text>
+  </g>
+
+  <!-- PROPERTIES (x: 420, y: 420, w: 360, h: 480) -->
+  <g filter="url(#shadow)">
+    <rect x="420" y="420" width="360" height="480" rx="8" fill="#1e293b" stroke="#6d28d9" stroke-width="2"/>
+    <rect x="420" y="420" width="360" height="36" rx="8" fill="url(#headerPropGrad)"/>
+    <rect x="420" y="448" width="360" height="8" fill="url(#headerPropGrad)"/>
+    <text x="600" y="444" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="bold">properties (Core Listing Entity)</text>
+    
+    <text x="435" y="475" fill="#fbbf24" font-size="12" font-family="monospace">PK  property_id : INT</text>
+    <text x="435" y="495" fill="#38bdf8" font-size="12" font-family="monospace">FK  listed_by : INT (users)</text>
+    <text x="435" y="515" fill="#38bdf8" font-size="12" font-family="monospace">FK  project_id : INT (projects) [NULL]</text>
+    <text x="435" y="535" fill="#38bdf8" font-size="12" font-family="monospace">FK  locality_id : INT (localities)</text>
+    <text x="435" y="555" fill="#e2e8f0" font-size="12" font-family="monospace">CHK listing_type : VARCHAR(10) (RENT/SALE)</text>
+    <text x="435" y="575" fill="#e2e8f0" font-size="12" font-family="monospace">CHK property_type : VARCHAR(20)</text>
+    <text x="435" y="595" fill="#94a3b8" font-size="12" font-family="monospace">CHK bhk : SMALLINT [NULL for PLOT]</text>
+    <text x="435" y="615" fill="#e2e8f0" font-size="12" font-family="monospace">CHK carpet_area_sqft : NUMERIC(10,2)</text>
+    <text x="435" y="635" fill="#94a3b8" font-size="12" font-family="monospace">    floor_no : SMALLINT [NULL]</text>
+    <text x="435" y="655" fill="#94a3b8" font-size="12" font-family="monospace">    total_floors : SMALLINT [NULL]</text>
+    <text x="435" y="675" fill="#94a3b8" font-size="12" font-family="monospace">CHK furnishing : VARCHAR(20) [NULL]</text>
+    <text x="435" y="695" fill="#e2e8f0" font-size="12" font-family="monospace">CHK facing : VARCHAR(20)</text>
+    <text x="435" y="715" fill="#e2e8f0" font-size="12" font-family="monospace">CHK price : NUMERIC(12,2)</text>
+    <text x="435" y="735" fill="#94a3b8" font-size="12" font-family="monospace">    maintenance_monthly : NUMERIC(10,2)</text>
+    <text x="435" y="755" fill="#94a3b8" font-size="12" font-family="monospace">    security_deposit : NUMERIC(12,2)</text>
+    <text x="435" y="775" fill="#e2e8f0" font-size="12" font-family="monospace">    available_from : DATE</text>
+    <text x="435" y="795" fill="#e2e8f0" font-size="12" font-family="monospace">CHK latitude : NUMERIC(9,6)</text>
+    <text x="435" y="815" fill="#e2e8f0" font-size="12" font-family="monospace">CHK longitude : NUMERIC(9,6)</text>
+    <text x="435" y="835" fill="#e2e8f0" font-size="12" font-family="monospace">    is_verified : BOOLEAN</text>
+    <text x="435" y="855" fill="#e2e8f0" font-size="12" font-family="monospace">CHK status : VARCHAR(10) (ACTIVE...)</text>
+    <text x="435" y="875" fill="#e2e8f0" font-size="12" font-family="monospace">    posted_at : TIMESTAMPTZ</text>
+    <text x="435" y="893" fill="#94a3b8" font-size="10" font-style="italic">CHK (floor_no &lt;= total_floors)</text>
+  </g>
+
+  <!-- ================= ROW 3: INTERACTIONS & TRANSACTIONS ================= -->
+
+  <!-- PRICE_CHANGES (x: 870, y: 440, w: 260, h: 180) -->
+  <g filter="url(#shadow)">
+    <rect x="870" y="440" width="260" height="180" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+    <rect x="870" y="440" width="260" height="34" rx="8" fill="url(#headerTxGrad)"/>
+    <rect x="870" y="466" width="260" height="8" fill="url(#headerTxGrad)"/>
+    <text x="1000" y="463" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="bold">price_changes</text>
+    <text x="885" y="495" fill="#fbbf24" font-size="12" font-family="monospace">PK  change_id : INT</text>
+    <text x="885" y="520" fill="#38bdf8" font-size="12" font-family="monospace">FK  property_id : INT</text>
+    <text x="885" y="545" fill="#e2e8f0" font-size="12" font-family="monospace">CHK old_price : NUMERIC(12,2)</text>
+    <text x="885" y="570" fill="#e2e8f0" font-size="12" font-family="monospace">CHK new_price : NUMERIC(12,2)</text>
+    <text x="885" y="595" fill="#e2e8f0" font-size="12" font-family="monospace">    changed_at : TIMESTAMPTZ</text>
+    <text x="885" y="613" fill="#94a3b8" font-size="10" font-style="italic">CHK (old_price &lt;&gt; new_price)</text>
+  </g>
+
+  <!-- ENQUIRIES (x: 1200, y: 440, w: 260, h: 200) -->
+  <g filter="url(#shadow)">
+    <rect x="1200" y="440" width="260" height="200" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+    <rect x="1200" y="440" width="260" height="34" rx="8" fill="url(#headerTxGrad)"/>
+    <rect x="1200" y="466" width="260" height="8" fill="url(#headerTxGrad)"/>
+    <text x="1330" y="463" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="bold">enquiries</text>
+    <text x="1215" y="495" fill="#fbbf24" font-size="12" font-family="monospace">PK  enquiry_id : INT</text>
+    <text x="1215" y="520" fill="#38bdf8" font-size="12" font-family="monospace">FK  property_id : INT</text>
+    <text x="1215" y="545" fill="#38bdf8" font-size="12" font-family="monospace">FK  user_id : INT</text>
+    <text x="1215" y="570" fill="#e2e8f0" font-size="12" font-family="monospace">CHK channel : VARCHAR(10)</text>
+    <text x="1215" y="595" fill="#94a3b8" font-size="12" font-family="monospace">    message : TEXT [NULL]</text>
+    <text x="1215" y="620" fill="#e2e8f0" font-size="12" font-family="monospace">    created_at : TIMESTAMPTZ</text>
+  </g>
+
+  <!-- SITE_VISITS (x: 870, y: 680, w: 260, h: 200) -->
+  <g filter="url(#shadow)">
+    <rect x="870" y="680" width="260" height="200" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+    <rect x="870" y="680" width="260" height="34" rx="8" fill="url(#headerTxGrad)"/>
+    <rect x="870" y="706" width="260" height="8" fill="url(#headerTxGrad)"/>
+    <text x="1000" y="703" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="bold">site_visits</text>
+    <text x="885" y="735" fill="#fbbf24" font-size="12" font-family="monospace">PK  visit_id : INT</text>
+    <text x="885" y="760" fill="#38bdf8" font-size="12" font-family="monospace">FK  property_id : INT</text>
+    <text x="885" y="785" fill="#38bdf8" font-size="12" font-family="monospace">FK  user_id : INT</text>
+    <text x="885" y="810" fill="#e2e8f0" font-size="12" font-family="monospace">    scheduled_at : TIMESTAMPTZ</text>
+    <text x="885" y="835" fill="#e2e8f0" font-size="12" font-family="monospace">CHK status : VARCHAR(15)</text>
+    <text x="885" y="860" fill="#94a3b8" font-size="12" font-family="monospace">CHK feedback_rating : 1..5 [N]</text>
+  </g>
+
+  <!-- SHORTLISTS (x: 1200, y: 680, w: 260, h: 150) -->
+  <g filter="url(#shadow)">
+    <rect x="1200" y="680" width="260" height="150" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+    <rect x="1200" y="680" width="260" height="34" rx="8" fill="url(#headerTxGrad)"/>
+    <rect x="1200" y="706" width="260" height="8" fill="url(#headerTxGrad)"/>
+    <text x="1330" y="703" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="bold">shortlists</text>
+    <text x="1215" y="735" fill="#fbbf24" font-size="12" font-family="monospace">PK,FK user_id : INT</text>
+    <text x="1215" y="760" fill="#fbbf24" font-size="12" font-family="monospace">PK,FK property_id : INT</text>
+    <text x="1215" y="785" fill="#e2e8f0" font-size="12" font-family="monospace">      added_at : TIMESTAMPTZ</text>
+    <text x="1215" y="815" fill="#94a3b8" font-size="10" font-style="italic">Composite PK (M:N bookmark)</text>
+  </g>
+
+  <!-- ================= RELATIONSHIP CONNECTORS & CARDINALITIES ================= -->
+
+  <!-- cities -> localities (1:N) -->
+  <path d="M 290 175 L 350 175" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="320" y="165" fill="#94a3b8" font-size="11" text-anchor="middle">1 : N</text>
+
+  <!-- builders -> projects (1:N) -->
+  <path d="M 910 175 L 970 175" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="940" y="165" fill="#94a3b8" font-size="11" text-anchor="middle">1 : N</text>
+
+  <!-- localities -> projects (1:N) -->
+  <path d="M 610 215 L 750 280 L 970 215" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="750" y="270" fill="#94a3b8" font-size="11" text-anchor="middle">1 : N (locality)</text>
+
+  <!-- projects -> project_amenities (1:N) -->
+  <path d="M 1240 320 L 1300 320" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="1270" y="312" fill="#94a3b8" font-size="11" text-anchor="middle">1 : N</text>
+
+  <!-- amenities -> project_amenities (1:N) -->
+  <path d="M 1425 230 L 1425 280" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="1445" y="260" fill="#94a3b8" font-size="11">1 : N</text>
+
+  <!-- localities -> properties (1:N) -->
+  <path d="M 480 325 L 480 420" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="500" y="380" fill="#94a3b8" font-size="11">1 : N</text>
+
+  <!-- projects -> properties (0..1:N) -->
+  <path d="M 1000 350 L 1000 400 L 780 470" stroke="#64748b" stroke-width="2" stroke-dasharray="4" fill="none" marker-end="url(#arrow)"/>
+  <text x="920" y="415" fill="#94a3b8" font-size="11">0..1 : N (optional)</text>
+
+  <!-- users -> properties (1:N, listed_by) -->
+  <path d="M 310 515 L 420 515" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="365" y="505" fill="#94a3b8" font-size="11" text-anchor="middle">1 : N</text>
+
+  <!-- properties -> price_changes (1:N) -->
+  <path d="M 780 520 L 870 520" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="825" y="510" fill="#94a3b8" font-size="11" text-anchor="middle">1 : N</text>
+
+  <!-- properties -> enquiries (1:N) -->
+  <path d="M 780 550 L 840 550 L 840 430 L 1200 480" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="840" y="420" fill="#94a3b8" font-size="11" text-anchor="middle">1 : N</text>
+
+  <!-- properties -> site_visits (1:N) -->
+  <path d="M 780 760 L 870 760" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="825" y="750" fill="#94a3b8" font-size="11" text-anchor="middle">1 : N</text>
+
+  <!-- properties -> shortlists (1:N) -->
+  <path d="M 780 820 L 1200 760" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="1000" y="805" fill="#94a3b8" font-size="11" text-anchor="middle">1 : N</text>
+
+  <!-- users -> enquiries, site_visits, shortlists (curved routes) -->
+  <path d="M 180 660 L 180 940 L 1000 940 L 1000 880" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3" fill="none" marker-end="url(#arrow)"/>
+  <text x="300" y="930" fill="#38bdf8" font-size="11">users (1) ─── site_visits (N)</text>
+
+  <path d="M 180 940 L 1330 940 L 1330 830" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3" fill="none" marker-end="url(#arrow)"/>
+  <text x="1250" y="930" fill="#38bdf8" font-size="11">users (1) ─── shortlists (N)</text>
+
+  <!-- Legend -->
+  <g transform="translate(50, 990)">
+    <rect x="0" y="0" width="1500" height="120" rx="6" fill="#1e293b" stroke="#334155"/>
+    <text x="25" y="25" fill="#f8fafc" font-size="13" font-weight="bold">Diagram Legend &amp; Design Notes:</text>
+    
+    <text x="25" y="55" fill="#fbbf24" font-size="12" font-family="monospace">PK</text>
+    <text x="50" y="55" fill="#cbd5e1" font-size="12">Primary Key (Single or Composite)</text>
+
+    <text x="310" y="55" fill="#38bdf8" font-size="12" font-family="monospace">FK</text>
+    <text x="335" y="55" fill="#cbd5e1" font-size="12">Foreign Key (Referential Integrity)</text>
+
+    <text x="610" y="55" fill="#e2e8f0" font-size="12" font-family="monospace">UQ / CHK</text>
+    <text x="685" y="55" fill="#cbd5e1" font-size="12">Unique Constraint / Check Constraint</text>
+
+    <text x="960" y="55" fill="#94a3b8" font-size="12" font-family="monospace">[NULL]</text>
+    <text x="1015" y="55" fill="#cbd5e1" font-size="12">Nullable attribute (e.g. plot has no bhk)</text>
+
+    <text x="25" y="90" fill="#94a3b8" font-size="12">Deletions: RESTRICT on core parent references; CASCADE on child logs (price_changes, enquiries, site_visits, shortlists) &amp; M:N junctions; SET NULL on projects.</text>
+  </g>
+</svg>
