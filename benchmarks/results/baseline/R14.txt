@@ -1,0 +1,96 @@
+=== R14 run 1 ===
+Limit  (cost=5475.75..5475.80 rows=20 width=24) (actual time=30.107..30.110 rows=20.00 loops=1)
+  Buffers: shared hit=3032
+  ->  Sort  (cost=5475.75..5477.89 rows=855 width=24) (actual time=30.106..30.108 rows=20.00 loops=1)
+        Sort Key: (count(*)) DESC
+        Sort Method: top-N heapsort  Memory: 27kB
+        Buffers: shared hit=3032
+        ->  GroupAggregate  (cost=5438.04..5453.00 rows=855 width=24) (actual time=29.607..29.969 rows=1146.00 loops=1)
+              Group Key: u.user_id
+              Buffers: shared hit=3029
+              ->  Sort  (cost=5438.04..5440.17 rows=855 width=16) (actual time=29.596..29.670 rows=1799.00 loops=1)
+                    Sort Key: u.user_id
+                    Sort Method: quicksort  Memory: 110kB
+                    Buffers: shared hit=3029
+                    ->  Hash Join  (cost=989.54..5396.40 rows=855 width=16) (actual time=19.996..29.297 rows=1799.00 loops=1)
+                          Hash Cond: (p.listed_by = u.user_id)
+                          Buffers: shared hit=3026
+                          ->  Seq Scan on properties p  (cost=0.00..4362.90 rows=16747 width=4) (actual time=15.933..24.202 rows=10568.00 loops=1)
+                                Filter: (((status)::text = ANY ('{SOLD,RENTED}'::text[])) AND (posted_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone))
+                                Rows Removed by Filter: 109492
+                                Buffers: shared hit=2562
+                          ->  Hash  (cost=964.00..964.00 rows=2043 width=16) (actual time=4.053..4.054 rows=2049.00 loops=1)
+                                Buckets: 2048  Batches: 1  Memory Usage: 113kB
+                                Buffers: shared hit=464
+                                ->  Seq Scan on users u  (cost=0.00..964.00 rows=2043 width=16) (actual time=0.022..3.829 rows=2049.00 loops=1)
+                                      Filter: ((user_type)::text = 'AGENT'::text)
+                                      Rows Removed by Filter: 37951
+                                      Buffers: shared hit=464
+Planning:
+  Buffers: shared hit=244
+Planning Time: 0.702 ms
+Execution Time: 30.158 ms
+=== R14 run 2 ===
+Limit  (cost=5475.75..5475.80 rows=20 width=24) (actual time=28.852..28.856 rows=20.00 loops=1)
+  Buffers: shared hit=3032
+  ->  Sort  (cost=5475.75..5477.89 rows=855 width=24) (actual time=28.851..28.853 rows=20.00 loops=1)
+        Sort Key: (count(*)) DESC
+        Sort Method: top-N heapsort  Memory: 27kB
+        Buffers: shared hit=3032
+        ->  GroupAggregate  (cost=5438.04..5453.00 rows=855 width=24) (actual time=28.353..28.715 rows=1146.00 loops=1)
+              Group Key: u.user_id
+              Buffers: shared hit=3029
+              ->  Sort  (cost=5438.04..5440.17 rows=855 width=16) (actual time=28.342..28.417 rows=1799.00 loops=1)
+                    Sort Key: u.user_id
+                    Sort Method: quicksort  Memory: 110kB
+                    Buffers: shared hit=3029
+                    ->  Hash Join  (cost=989.54..5396.40 rows=855 width=16) (actual time=18.971..28.050 rows=1799.00 loops=1)
+                          Hash Cond: (p.listed_by = u.user_id)
+                          Buffers: shared hit=3026
+                          ->  Seq Scan on properties p  (cost=0.00..4362.90 rows=16747 width=4) (actual time=15.464..23.531 rows=10568.00 loops=1)
+                                Filter: (((status)::text = ANY ('{SOLD,RENTED}'::text[])) AND (posted_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone))
+                                Rows Removed by Filter: 109492
+                                Buffers: shared hit=2562
+                          ->  Hash  (cost=964.00..964.00 rows=2043 width=16) (actual time=3.495..3.496 rows=2049.00 loops=1)
+                                Buckets: 2048  Batches: 1  Memory Usage: 113kB
+                                Buffers: shared hit=464
+                                ->  Seq Scan on users u  (cost=0.00..964.00 rows=2043 width=16) (actual time=0.012..3.267 rows=2049.00 loops=1)
+                                      Filter: ((user_type)::text = 'AGENT'::text)
+                                      Rows Removed by Filter: 37951
+                                      Buffers: shared hit=464
+Planning:
+  Buffers: shared hit=244
+Planning Time: 0.723 ms
+Execution Time: 28.909 ms
+=== R14 run 3 ===
+Limit  (cost=5475.75..5475.80 rows=20 width=24) (actual time=29.307..29.311 rows=20.00 loops=1)
+  Buffers: shared hit=3032
+  ->  Sort  (cost=5475.75..5477.89 rows=855 width=24) (actual time=29.305..29.308 rows=20.00 loops=1)
+        Sort Key: (count(*)) DESC
+        Sort Method: top-N heapsort  Memory: 27kB
+        Buffers: shared hit=3032
+        ->  GroupAggregate  (cost=5438.04..5453.00 rows=855 width=24) (actual time=28.809..29.176 rows=1146.00 loops=1)
+              Group Key: u.user_id
+              Buffers: shared hit=3029
+              ->  Sort  (cost=5438.04..5440.17 rows=855 width=16) (actual time=28.795..28.871 rows=1799.00 loops=1)
+                    Sort Key: u.user_id
+                    Sort Method: quicksort  Memory: 110kB
+                    Buffers: shared hit=3029
+                    ->  Hash Join  (cost=989.54..5396.40 rows=855 width=16) (actual time=19.098..28.497 rows=1799.00 loops=1)
+                          Hash Cond: (p.listed_by = u.user_id)
+                          Buffers: shared hit=3026
+                          ->  Seq Scan on properties p  (cost=0.00..4362.90 rows=16747 width=4) (actual time=15.686..24.034 rows=10568.00 loops=1)
+                                Filter: (((status)::text = ANY ('{SOLD,RENTED}'::text[])) AND (posted_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone))
+                                Rows Removed by Filter: 109492
+                                Buffers: shared hit=2562
+                          ->  Hash  (cost=964.00..964.00 rows=2043 width=16) (actual time=3.398..3.399 rows=2049.00 loops=1)
+                                Buckets: 2048  Batches: 1  Memory Usage: 113kB
+                                Buffers: shared hit=464
+                                ->  Seq Scan on users u  (cost=0.00..964.00 rows=2043 width=16) (actual time=0.021..3.179 rows=2049.00 loops=1)
+                                      Filter: ((user_type)::text = 'AGENT'::text)
+                                      Rows Removed by Filter: 37951
+                                      Buffers: shared hit=464
+Planning:
+  Buffers: shared hit=244
+Planning Time: 0.723 ms
+Execution Time: 29.359 ms

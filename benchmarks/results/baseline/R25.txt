@@ -1,0 +1,93 @@
+=== R25 run 1 ===
+GroupAggregate  (cost=5263.49..168389834.33 rows=10 width=20) (actual time=138.604..663.074 rows=10.00 loops=1)
+  Group Key: l.city_id
+  Buffers: shared hit=3847
+  ->  Nested Loop  (cost=5263.49..111713.24 rows=69999 width=12) (actual time=23.875..621.327 rows=69999.00 loops=1)
+        Join Filter: (l.locality_id = p.locality_id)
+        Rows Removed by Join Filter: 6929901
+        Buffers: shared hit=2943
+        ->  Index Scan using uq_localities_city_name on localities l  (cost=0.14..13.64 rows=100 width=8) (actual time=0.004..0.088 rows=100.00 loops=1)
+              Index Searches: 1
+              Buffers: shared hit=2
+        ->  Materialize  (cost=5263.35..6876.09 rows=69999 width=12) (actual time=0.237..3.011 rows=69999.00 loops=100)
+              Storage: Memory  Maximum Storage: 3418kB
+              Buffers: shared hit=2941
+              ->  Hash Join  (cost=5263.35..6526.10 rows=69999 width=12) (actual time=23.673..47.103 rows=69999.00 loops=1)
+                    Hash Cond: (s.property_id = p.property_id)
+                    Buffers: shared hit=2941
+                    ->  Seq Scan on shortlists s  (cost=0.00..1078.99 rows=69999 width=8) (actual time=0.009..3.960 rows=69999.00 loops=1)
+                          Buffers: shared hit=379
+                    ->  Hash  (cost=3762.60..3762.60 rows=120060 width=8) (actual time=23.554..23.555 rows=120060.00 loops=1)
+                          Buckets: 131072  Batches: 1  Memory Usage: 5714kB
+                          Buffers: shared hit=2562
+                          ->  Seq Scan on properties p  (cost=0.00..3762.60 rows=120060 width=8) (actual time=0.004..13.778 rows=120060.00 loops=1)
+                                Buffers: shared hit=2562
+  SubPlan 2
+    ->  Seq Scan on enquiries e  (cost=0.00..1904.00 rows=100000 width=8) (actual time=0.023..8.607 rows=100000.00 loops=1)
+          Buffers: shared hit=904
+Planning:
+  Buffers: shared hit=229
+Planning Time: 1.014 ms
+Execution Time: 663.232 ms
+=== R25 run 2 ===
+GroupAggregate  (cost=5263.49..168389834.33 rows=10 width=20) (actual time=132.255..656.076 rows=10.00 loops=1)
+  Group Key: l.city_id
+  Buffers: shared hit=3847
+  ->  Nested Loop  (cost=5263.49..111713.24 rows=69999 width=12) (actual time=24.716..619.440 rows=69999.00 loops=1)
+        Join Filter: (l.locality_id = p.locality_id)
+        Rows Removed by Join Filter: 6929901
+        Buffers: shared hit=2943
+        ->  Index Scan using uq_localities_city_name on localities l  (cost=0.14..13.64 rows=100 width=8) (actual time=0.004..0.044 rows=100.00 loops=1)
+              Index Searches: 1
+              Buffers: shared hit=2
+        ->  Materialize  (cost=5263.35..6876.09 rows=69999 width=12) (actual time=0.245..2.975 rows=69999.00 loops=100)
+              Storage: Memory  Maximum Storage: 3418kB
+              Buffers: shared hit=2941
+              ->  Hash Join  (cost=5263.35..6526.10 rows=69999 width=12) (actual time=24.461..42.511 rows=69999.00 loops=1)
+                    Hash Cond: (s.property_id = p.property_id)
+                    Buffers: shared hit=2941
+                    ->  Seq Scan on shortlists s  (cost=0.00..1078.99 rows=69999 width=8) (actual time=0.007..3.175 rows=69999.00 loops=1)
+                          Buffers: shared hit=379
+                    ->  Hash  (cost=3762.60..3762.60 rows=120060 width=8) (actual time=24.329..24.330 rows=120060.00 loops=1)
+                          Buckets: 131072  Batches: 1  Memory Usage: 5714kB
+                          Buffers: shared hit=2562
+                          ->  Seq Scan on properties p  (cost=0.00..3762.60 rows=120060 width=8) (actual time=0.004..14.423 rows=120060.00 loops=1)
+                                Buffers: shared hit=2562
+  SubPlan 2
+    ->  Seq Scan on enquiries e  (cost=0.00..1904.00 rows=100000 width=8) (actual time=0.022..8.558 rows=100000.00 loops=1)
+          Buffers: shared hit=904
+Planning:
+  Buffers: shared hit=229
+Planning Time: 0.969 ms
+Execution Time: 656.294 ms
+=== R25 run 3 ===
+GroupAggregate  (cost=5263.49..168389834.33 rows=10 width=20) (actual time=141.354..664.130 rows=10.00 loops=1)
+  Group Key: l.city_id
+  Buffers: shared hit=3847
+  ->  Nested Loop  (cost=5263.49..111713.24 rows=69999 width=12) (actual time=27.025..620.894 rows=69999.00 loops=1)
+        Join Filter: (l.locality_id = p.locality_id)
+        Rows Removed by Join Filter: 6929901
+        Buffers: shared hit=2943
+        ->  Index Scan using uq_localities_city_name on localities l  (cost=0.14..13.64 rows=100 width=8) (actual time=0.005..0.096 rows=100.00 loops=1)
+              Index Searches: 1
+              Buffers: shared hit=2
+        ->  Materialize  (cost=5263.35..6876.09 rows=69999 width=12) (actual time=0.266..3.016 rows=69999.00 loops=100)
+              Storage: Memory  Maximum Storage: 3418kB
+              Buffers: shared hit=2941
+              ->  Hash Join  (cost=5263.35..6526.10 rows=69999 width=12) (actual time=26.575..48.725 rows=69999.00 loops=1)
+                    Hash Cond: (s.property_id = p.property_id)
+                    Buffers: shared hit=2941
+                    ->  Seq Scan on shortlists s  (cost=0.00..1078.99 rows=69999 width=8) (actual time=0.009..3.280 rows=69999.00 loops=1)
+                          Buffers: shared hit=379
+                    ->  Hash  (cost=3762.60..3762.60 rows=120060 width=8) (actual time=26.417..26.418 rows=120060.00 loops=1)
+                          Buckets: 131072  Batches: 1  Memory Usage: 5714kB
+                          Buffers: shared hit=2562
+                          ->  Seq Scan on properties p  (cost=0.00..3762.60 rows=120060 width=8) (actual time=0.006..15.819 rows=120060.00 loops=1)
+                                Buffers: shared hit=2562
+  SubPlan 2
+    ->  Seq Scan on enquiries e  (cost=0.00..1904.00 rows=100000 width=8) (actual time=0.029..8.932 rows=100000.00 loops=1)
+          Buffers: shared hit=904
+Planning:
+  Buffers: shared hit=229
+Planning Time: 1.176 ms
+Execution Time: 664.357 ms
