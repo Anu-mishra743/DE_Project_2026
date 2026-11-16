@@ -1,0 +1,90 @@
+=== R04 run 1 ===
+GroupAggregate  (cost=5130.06..5130.12 rows=2 width=48) (actual time=10.103..10.850 rows=6.00 loops=1)
+  Group Key: (date_trunc('month'::text, p.posted_at))
+  Buffers: shared hit=2567
+  ->  Sort  (cost=5130.06..5130.06 rows=2 width=19) (actual time=10.092..10.823 rows=143.00 loops=1)
+        Sort Key: (date_trunc('month'::text, p.posted_at))
+        Sort Method: quicksort  Memory: 30kB
+        Buffers: shared hit=2567
+        ->  Gather  (cost=1002.26..5130.05 rows=2 width=19) (actual time=6.788..10.803 rows=143.00 loops=1)
+              Workers Planned: 1
+              Workers Launched: 1
+              Buffers: shared hit=2564
+              ->  Hash Join  (cost=2.26..4129.85 rows=1 width=19) (actual time=5.524..8.739 rows=71.50 loops=2)
+                    Hash Cond: (p.locality_id = l.locality_id)
+                    Buffers: shared hit=2564
+                    ->  Parallel Seq Scan on properties p  (cost=0.00..4127.20 rows=142 width=23) (actual time=5.401..8.459 rows=7015.00 loops=2)
+                          Filter: (((listing_type)::text = 'SALE'::text) AND ((property_type)::text = 'APARTMENT'::text) AND (EXTRACT(year FROM posted_at) = '2026'::numeric))
+                          Rows Removed by Filter: 53015
+                          Buffers: shared hit=2562
+                    ->  Hash  (cost=2.25..2.25 rows=1 width=4) (actual time=0.029..0.029 rows=1.00 loops=2)
+                          Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                          Buffers: shared hit=2
+                          ->  Seq Scan on localities l  (cost=0.00..2.25 rows=1 width=4) (actual time=0.023..0.026 rows=1.00 loops=2)
+                                Filter: ((locality_name)::text = 'Whitefield'::text)
+                                Rows Removed by Filter: 99
+                                Buffers: shared hit=2
+Planning:
+  Buffers: shared hit=402
+Planning Time: 0.661 ms
+Execution Time: 10.887 ms
+=== R04 run 2 ===
+GroupAggregate  (cost=5130.06..5130.12 rows=2 width=48) (actual time=9.006..9.648 rows=6.00 loops=1)
+  Group Key: (date_trunc('month'::text, p.posted_at))
+  Buffers: shared hit=2567
+  ->  Sort  (cost=5130.06..5130.06 rows=2 width=19) (actual time=8.995..9.623 rows=143.00 loops=1)
+        Sort Key: (date_trunc('month'::text, p.posted_at))
+        Sort Method: quicksort  Memory: 30kB
+        Buffers: shared hit=2567
+        ->  Gather  (cost=1002.26..5130.05 rows=2 width=19) (actual time=6.186..9.605 rows=143.00 loops=1)
+              Workers Planned: 1
+              Workers Launched: 1
+              Buffers: shared hit=2564
+              ->  Hash Join  (cost=2.26..4129.85 rows=1 width=19) (actual time=5.080..7.855 rows=71.50 loops=2)
+                    Hash Cond: (p.locality_id = l.locality_id)
+                    Buffers: shared hit=2564
+                    ->  Parallel Seq Scan on properties p  (cost=0.00..4127.20 rows=142 width=23) (actual time=4.995..7.620 rows=7015.00 loops=2)
+                          Filter: (((listing_type)::text = 'SALE'::text) AND ((property_type)::text = 'APARTMENT'::text) AND (EXTRACT(year FROM posted_at) = '2026'::numeric))
+                          Rows Removed by Filter: 53015
+                          Buffers: shared hit=2562
+                    ->  Hash  (cost=2.25..2.25 rows=1 width=4) (actual time=0.022..0.022 rows=1.00 loops=2)
+                          Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                          Buffers: shared hit=2
+                          ->  Seq Scan on localities l  (cost=0.00..2.25 rows=1 width=4) (actual time=0.017..0.020 rows=1.00 loops=2)
+                                Filter: ((locality_name)::text = 'Whitefield'::text)
+                                Rows Removed by Filter: 99
+                                Buffers: shared hit=2
+Planning:
+  Buffers: shared hit=402
+Planning Time: 0.580 ms
+Execution Time: 9.680 ms
+=== R04 run 3 ===
+GroupAggregate  (cost=5130.06..5130.12 rows=2 width=48) (actual time=8.152..8.730 rows=6.00 loops=1)
+  Group Key: (date_trunc('month'::text, p.posted_at))
+  Buffers: shared hit=2567
+  ->  Sort  (cost=5130.06..5130.06 rows=2 width=19) (actual time=8.144..8.710 rows=143.00 loops=1)
+        Sort Key: (date_trunc('month'::text, p.posted_at))
+        Sort Method: quicksort  Memory: 30kB
+        Buffers: shared hit=2567
+        ->  Gather  (cost=1002.26..5130.05 rows=2 width=19) (actual time=5.708..8.695 rows=143.00 loops=1)
+              Workers Planned: 1
+              Workers Launched: 1
+              Buffers: shared hit=2564
+              ->  Hash Join  (cost=2.26..4129.85 rows=1 width=19) (actual time=4.721..7.146 rows=71.50 loops=2)
+                    Hash Cond: (p.locality_id = l.locality_id)
+                    Buffers: shared hit=2564
+                    ->  Parallel Seq Scan on properties p  (cost=0.00..4127.20 rows=142 width=23) (actual time=4.623..6.936 rows=7015.00 loops=2)
+                          Filter: (((listing_type)::text = 'SALE'::text) AND ((property_type)::text = 'APARTMENT'::text) AND (EXTRACT(year FROM posted_at) = '2026'::numeric))
+                          Rows Removed by Filter: 53015
+                          Buffers: shared hit=2562
+                    ->  Hash  (cost=2.25..2.25 rows=1 width=4) (actual time=0.024..0.024 rows=1.00 loops=2)
+                          Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                          Buffers: shared hit=2
+                          ->  Seq Scan on localities l  (cost=0.00..2.25 rows=1 width=4) (actual time=0.019..0.022 rows=1.00 loops=2)
+                                Filter: ((locality_name)::text = 'Whitefield'::text)
+                                Rows Removed by Filter: 99
+                                Buffers: shared hit=2
+Planning:
+  Buffers: shared hit=402
+Planning Time: 0.539 ms
+Execution Time: 8.759 ms
