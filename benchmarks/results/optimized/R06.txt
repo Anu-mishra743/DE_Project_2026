@@ -1,0 +1,120 @@
+=== R06 run 1 ===
+Sort  (cost=272.73..272.75 rows=11 width=38) (actual time=0.260..0.261 rows=34.00 loops=1)
+  Sort Key: (count(DISTINCT e.enquiry_id)) DESC
+  Sort Method: quicksort  Memory: 26kB
+  Buffers: shared hit=286
+  ->  GroupAggregate  (cost=272.32..272.54 rows=11 width=38) (actual time=0.237..0.252 rows=34.00 loops=1)
+        Group Key: p.property_id
+        Buffers: shared hit=283
+        ->  Sort  (cost=272.32..272.34 rows=11 width=30) (actual time=0.232..0.233 rows=53.00 loops=1)
+              Sort Key: p.property_id, e.enquiry_id
+              Sort Method: quicksort  Memory: 27kB
+              Buffers: shared hit=283
+              ->  Nested Loop Left Join  (cost=9.23..272.13 rows=11 width=30) (actual time=0.017..0.222 rows=53.00 loops=1)
+                    Buffers: shared hit=280
+                    ->  Nested Loop Left Join  (cost=8.94..180.63 rows=11 width=26) (actual time=0.016..0.154 rows=43.00 loops=1)
+                          Buffers: shared hit=167
+                          ->  Bitmap Heap Scan on properties p  (cost=4.51..46.48 rows=11 width=22) (actual time=0.013..0.060 rows=34.00 loops=1)
+                                Recheck Cond: (listed_by = 1033)
+                                Heap Blocks: exact=40
+                                Buffers: shared hit=44
+                                ->  Bitmap Index Scan on idx_properties_listed_by  (cost=0.00..4.50 rows=11 width=0) (actual time=0.007..0.007 rows=40.00 loops=1)
+                                      Index Cond: (listed_by = 1033)
+                                      Index Searches: 1
+                                      Buffers: shared hit=4
+                          ->  Bitmap Heap Scan on enquiries e  (cost=4.43..12.18 rows=2 width=8) (actual time=0.002..0.002 rows=0.62 loops=34)
+                                Recheck Cond: (property_id = p.property_id)
+                                Heap Blocks: exact=21
+                                Buffers: shared hit=123
+                                ->  Bitmap Index Scan on idx_enquiries_prop_user_created  (cost=0.00..4.43 rows=2 width=0) (actual time=0.001..0.001 rows=0.62 loops=34)
+                                      Index Cond: (property_id = p.property_id)
+                                      Index Searches: 34
+                                      Buffers: shared hit=102
+                    ->  Index Scan using idx_site_visits_prop_user on site_visits v  (cost=0.29..8.31 rows=1 width=8) (actual time=0.001..0.001 rows=0.63 loops=43)
+                          Index Cond: (property_id = p.property_id)
+                          Index Searches: 43
+                          Buffers: shared hit=113
+Planning:
+  Buffers: shared hit=411 dirtied=1
+Planning Time: 0.812 ms
+Execution Time: 0.301 ms
+=== R06 run 2 ===
+Sort  (cost=272.73..272.75 rows=11 width=38) (actual time=0.244..0.244 rows=34.00 loops=1)
+  Sort Key: (count(DISTINCT e.enquiry_id)) DESC
+  Sort Method: quicksort  Memory: 26kB
+  Buffers: shared hit=286
+  ->  GroupAggregate  (cost=272.32..272.54 rows=11 width=38) (actual time=0.221..0.235 rows=34.00 loops=1)
+        Group Key: p.property_id
+        Buffers: shared hit=283
+        ->  Sort  (cost=272.32..272.34 rows=11 width=30) (actual time=0.216..0.217 rows=53.00 loops=1)
+              Sort Key: p.property_id, e.enquiry_id
+              Sort Method: quicksort  Memory: 27kB
+              Buffers: shared hit=283
+              ->  Nested Loop Left Join  (cost=9.23..272.13 rows=11 width=30) (actual time=0.016..0.207 rows=53.00 loops=1)
+                    Buffers: shared hit=280
+                    ->  Nested Loop Left Join  (cost=8.94..180.63 rows=11 width=26) (actual time=0.015..0.145 rows=43.00 loops=1)
+                          Buffers: shared hit=167
+                          ->  Bitmap Heap Scan on properties p  (cost=4.51..46.48 rows=11 width=22) (actual time=0.012..0.058 rows=34.00 loops=1)
+                                Recheck Cond: (listed_by = 1033)
+                                Heap Blocks: exact=40
+                                Buffers: shared hit=44
+                                ->  Bitmap Index Scan on idx_properties_listed_by  (cost=0.00..4.50 rows=11 width=0) (actual time=0.007..0.007 rows=40.00 loops=1)
+                                      Index Cond: (listed_by = 1033)
+                                      Index Searches: 1
+                                      Buffers: shared hit=4
+                          ->  Bitmap Heap Scan on enquiries e  (cost=4.43..12.18 rows=2 width=8) (actual time=0.002..0.002 rows=0.62 loops=34)
+                                Recheck Cond: (property_id = p.property_id)
+                                Heap Blocks: exact=21
+                                Buffers: shared hit=123
+                                ->  Bitmap Index Scan on idx_enquiries_prop_user_created  (cost=0.00..4.43 rows=2 width=0) (actual time=0.001..0.001 rows=0.62 loops=34)
+                                      Index Cond: (property_id = p.property_id)
+                                      Index Searches: 34
+                                      Buffers: shared hit=102
+                    ->  Index Scan using idx_site_visits_prop_user on site_visits v  (cost=0.29..8.31 rows=1 width=8) (actual time=0.001..0.001 rows=0.63 loops=43)
+                          Index Cond: (property_id = p.property_id)
+                          Index Searches: 43
+                          Buffers: shared hit=113
+Planning:
+  Buffers: shared hit=411
+Planning Time: 0.668 ms
+Execution Time: 0.282 ms
+=== R06 run 3 ===
+Sort  (cost=272.73..272.75 rows=11 width=38) (actual time=0.239..0.240 rows=34.00 loops=1)
+  Sort Key: (count(DISTINCT e.enquiry_id)) DESC
+  Sort Method: quicksort  Memory: 26kB
+  Buffers: shared hit=286
+  ->  GroupAggregate  (cost=272.32..272.54 rows=11 width=38) (actual time=0.218..0.231 rows=34.00 loops=1)
+        Group Key: p.property_id
+        Buffers: shared hit=283
+        ->  Sort  (cost=272.32..272.34 rows=11 width=30) (actual time=0.213..0.214 rows=53.00 loops=1)
+              Sort Key: p.property_id, e.enquiry_id
+              Sort Method: quicksort  Memory: 27kB
+              Buffers: shared hit=283
+              ->  Nested Loop Left Join  (cost=9.23..272.13 rows=11 width=30) (actual time=0.016..0.204 rows=53.00 loops=1)
+                    Buffers: shared hit=280
+                    ->  Nested Loop Left Join  (cost=8.94..180.63 rows=11 width=26) (actual time=0.015..0.143 rows=43.00 loops=1)
+                          Buffers: shared hit=167
+                          ->  Bitmap Heap Scan on properties p  (cost=4.51..46.48 rows=11 width=22) (actual time=0.012..0.056 rows=34.00 loops=1)
+                                Recheck Cond: (listed_by = 1033)
+                                Heap Blocks: exact=40
+                                Buffers: shared hit=44
+                                ->  Bitmap Index Scan on idx_properties_listed_by  (cost=0.00..4.50 rows=11 width=0) (actual time=0.006..0.006 rows=40.00 loops=1)
+                                      Index Cond: (listed_by = 1033)
+                                      Index Searches: 1
+                                      Buffers: shared hit=4
+                          ->  Bitmap Heap Scan on enquiries e  (cost=4.43..12.18 rows=2 width=8) (actual time=0.002..0.002 rows=0.62 loops=34)
+                                Recheck Cond: (property_id = p.property_id)
+                                Heap Blocks: exact=21
+                                Buffers: shared hit=123
+                                ->  Bitmap Index Scan on idx_enquiries_prop_user_created  (cost=0.00..4.43 rows=2 width=0) (actual time=0.001..0.001 rows=0.62 loops=34)
+                                      Index Cond: (property_id = p.property_id)
+                                      Index Searches: 34
+                                      Buffers: shared hit=102
+                    ->  Index Scan using idx_site_visits_prop_user on site_visits v  (cost=0.29..8.31 rows=1 width=8) (actual time=0.001..0.001 rows=0.63 loops=43)
+                          Index Cond: (property_id = p.property_id)
+                          Index Searches: 43
+                          Buffers: shared hit=113
+Planning:
+  Buffers: shared hit=411
+Planning Time: 0.663 ms
+Execution Time: 0.277 ms
